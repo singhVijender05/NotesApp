@@ -11,19 +11,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 <body>
-    <nav class="navbar flex items-center py-2 px-4  border-b-[1px] border-gray-400">
-        <div class="logopart flex items-center w-1/5 justify-start space-x-4">
+    <nav class="navbar flex md:justify-start justify-between items-center py-2 px-4  border-b-[1px] border-gray-400">
+        <div class="logopart flex items-center md:w-1/5 w-2/5 md:justify-start justify-between md:space-x-4 ">
             <button><i class="fa-solid fa-bars"></i></button>
             <img class="w-10 h-11" src="Education_(638).jpg" alt="error">
-            <span class="text-xl font-bold">Note Saver</span>
+            <span class="md:text-xl text-base font-bold">Note Saver</span>
         </div>
-        <div class="searchbox w-3/5 bg-gray-200 rounded-md">
-            <i id="searchbtn" class="fa-solid fa-magnifying-glass px-3 py-2 cursor-pointer"></i>
-            <input class="w-4/5 bg-gray-200 px-3 py-2 outline-none rounded-md  placeholder:text-black" type="text" placeholder="Search Note Here">
+        <div class="searchbox flex items-center md:w-3/5 w-2/5 bg-gray-200 rounded-md">
+            <i id="searchbtn" class="fa-solid fa-magnifying-glass md:px-3 md:py-2 px-2 py-1 cursor-pointer"></i>
+            <input class="w-4/5 bg-gray-200 px-3 py-2 outline-none rounded-md  placeholder:text-black placeholder:text-sm md:placeholder:text-base" type="text" placeholder="Search Note">
         </div>
     </nav>
-    <main class="w-full mt-2">
-        <div class="appOptions flex flex-col w-2/12 border-r-[1px] border-gray-400 h-screen space-y-1">
+    <main class="w-full h-max mt-2 flex">
+        <aside class="appOptions flex flex-col w-2/12 border-r-[1px] border-gray-400 h-screen space-y-1">
           <div class="noteicon  bg-icon flex items-center text-sm font-bold  px-4 py-2  space-x-12 rounded-r-full">
             <div class="icon  rounded-full px-3 py-2"><i class="fa-solid fa-pen"></i></div>
             <span class="">Notes</span>
@@ -37,7 +37,72 @@
             <span class="">Trash</span>
           </div>
           
+        </aside >
+        <section class="w-9/12 p-8 ">
+          <div class="noteInputBox  w-1/2 border-[2px] shadow-md shadow-gray-500 border-gray-400 rounded-md p-4">
+            <div class="title-and-pin flex justify-between items-center">
+                    <input class="w-11/12 px-2 outline-none placeholder:text-gray-600 placeholder:font-medium" type="text" placeholder="Title"><i id="pin-note" class="fa-solid fa-thumbtack "></i>
+            </div>
+            <div class="note-input mt-3">
+                    <textarea class="px-2 outline-none w-full placeholder:text-gray-600 placeholder:font-medium" type="text" placeholder="Add note here..."></textarea>
+            </div>
+            <div class="add w-full flex items-center justify-end ">
+                <button class="px-3 py-2 text-base font-semibold">Add</button>
+            </div>
         </div>
+          <div class="added-notes p-4 w-full flex flex-wrap mt-14">
+            <div class="addedNotes p-4 mx-4 my-3 w-1/4 border-2 border-gray-400 rounded-md">
+                <div class="title-utilicons relative">
+                    <div class="utilicons absolute right-0 top-0">
+                        <span class="flex  space-x-3"><i id="" class="fa-solid fa-thumbtack "></i><i class="fa-solid fa-trash"></i></span>
+                    </div>
+                    <h1 class="text-xl  font-medium">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h1>
+                </div>
+                <p class="mt-2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo maiores ducimus quo ex. Accusantium repudiandae explicabo dolorum quo temporibus totam illo consectetur.</p>
+            </div>
+           
+            <div class="addedNotes p-4 mx-4 my-3 w-1/4 border-2 border-gray-400 rounded-md">
+                <div class="title-utilicons relative">
+                    <div class="utilicons absolute right-0 top-0">
+                        <span class="flex  space-x-3"><i id="" class="fa-solid fa-thumbtack "></i><i class="fa-solid fa-trash"></i></span>
+                    </div>
+                    <h1 class="text-xl  font-medium">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h1>
+                </div>
+                <p class="mt-2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo maiores ducimus quo ex. Accusantium repudiandae explicabo dolorum quo temporibus totam illo consectetur.</p>
+            </div>
+           
+            <div class="addedNotes p-4 mx-4 my-3 w-1/4 border-2 border-gray-400 rounded-md">
+                <div class="title-utilicons relative">
+                    <div class="utilicons absolute right-0 top-0">
+                        <span class="flex  space-x-3"><i id="" class="fa-solid fa-thumbtack "></i><i class="fa-solid fa-trash"></i></span>
+                    </div>
+                    <h1 class="text-xl  font-medium">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h1>
+                </div>
+                <p class="mt-2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo maiores ducimus quo ex. Accusantium repudiandae explicabo dolorum quo temporibus totam illo consectetur.</p>
+            </div>
+           
+            <div class="addedNotes p-4 mx-4 my-3 w-1/4 border-2 border-gray-400 rounded-md">
+                <div class="title-utilicons relative">
+                    <div class="utilicons absolute right-0 top-0">
+                        <span class="flex  space-x-3"><i id="" class="fa-solid fa-thumbtack "></i><i class="fa-solid fa-trash"></i></span>
+                    </div>
+                    <h1 class="text-xl  font-medium">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h1>
+                </div>
+                <p class="mt-2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo maiores ducimus quo ex. Accusantium repudiandae explicabo dolorum quo temporibus totam illo consectetur.</p>
+            </div>
+           
+            <div class="addedNotes p-4 mx-4 my-3 w-1/4 border-2 border-gray-400 rounded-md">
+                <div class="title-utilicons relative">
+                    <div class="utilicons absolute right-0 top-0">
+                        <span class="flex  space-x-3"><i id="" class="fa-solid fa-thumbtack "></i><i class="fa-solid fa-trash"></i></span>
+                    </div>
+                    <h1 class="text-xl  font-medium">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h1>
+                </div>
+                <p class="mt-2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo maiores ducimus quo ex. Accusantium repudiandae explicabo dolorum quo temporibus totam illo consectetur.</p>
+            </div>
+           
+          </div>
+        </section>
     </main>
     <script src="script.js"></script>
 </body>
