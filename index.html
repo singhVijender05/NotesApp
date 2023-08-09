@@ -5,9 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300&family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 <body>
-    <h1>Sorry darling</h1>
+    <nav class="navbar flex items-center py-2 px-4  border-b-[1px] border-gray-400">
+        <div class="logopart flex items-center w-1/5 justify-start space-x-4">
+            <button><i class="fa-solid fa-bars"></i></button>
+            <img class="w-10 h-11" src="Education_(638).jpg" alt="error">
+            <span class="text-xl font-bold">Note Saver</span>
+        </div>
+        <div class="searchbox w-3/5 bg-gray-200 rounded-md">
+            <i id="searchbtn" class="fa-solid fa-magnifying-glass px-3 py-2 cursor-pointer"></i>
+            <input class="w-4/5 bg-gray-200 px-3 py-2 outline-none rounded-md  placeholder:text-black" type="text" placeholder="Search Note Here">
+        </div>
+    </nav>
+    <main class="w-full mt-2">
+        <div class="appOptions flex flex-col w-2/12 border-r-[1px] border-gray-400 h-screen space-y-1">
+          <div class="noteicon  bg-icon flex items-center text-sm font-bold  px-4 py-2  space-x-12 rounded-r-full">
+            <div class="icon  rounded-full px-3 py-2"><i class="fa-solid fa-pen"></i></div>
+            <span class="">Notes</span>
+          </div>
+          <div class="archiveicon  bg-icon flex items-center text-sm font-bold  px-4 py-2  space-x-12 rounded-r-full">
+            <div class="icon  rounded-full px-3 py-2"><i class="fa-solid fa-box-archive"></i></div>
+            <span class="">Archive</span>
+          </div>
+          <div class="trashicon  bg-icon flex items-center text-sm font-bold  px-4 py-2  space-x-12 rounded-r-full">
+            <div class="icon  rounded-full px-3 py-2"><i class="fa-solid fa-trash"></i></div>
+            <span class="">Trash</span>
+          </div>
+          
+        </div>
+    </main>
     <script src="script.js"></script>
 </body>
 </html>
