@@ -3,11 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Save ideas and many more</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300&family=Open+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 <body>
@@ -23,10 +20,10 @@
         </div>
     </nav>
     <main class="w-full h-max mt-2 flex">
-        <aside class="appOptions flex flex-col w-2/12 border-r-[1px] border-gray-400 h-screen space-y-1">
-          <div class="noteicon  bg-icon flex items-center text-sm font-bold  px-4 py-2  space-x-12 rounded-r-full">
+        <aside class="appOptions pr-2 flex flex-col w-2/12 border-r-[1px] border-gray-400 h-screen space-y-1">
+          <div id="startTakingNote" class="noteicon  bg-icon flex items-center text-sm font-bold  px-4 py-2  space-x-12 rounded-r-full">
             <div class="icon  rounded-full px-3 py-2"><i class="fa-solid fa-pen"></i></div>
-            <span class="">Notes</span>
+            <span class="">Note</span>
           </div>
           <div class="archiveicon  bg-icon flex items-center text-sm font-bold  px-4 py-2  space-x-12 rounded-r-full">
             <div class="icon  rounded-full px-3 py-2"><i class="fa-solid fa-box-archive"></i></div>
@@ -43,63 +40,48 @@
             <div class="title-and-pin flex justify-between items-center">
                     <input class="w-11/12 px-2 outline-none placeholder:text-gray-600 placeholder:font-medium" type="text" placeholder="Title"><i id="pin-note" class="fa-solid fa-thumbtack "></i>
             </div>
-            <div class="note-input mt-3">
+            <div id="ipTextAreaAddbtn" class="hidden">
+                <div class="note-input mt-3">
                     <textarea class="px-2 outline-none w-full placeholder:text-gray-600 placeholder:font-medium" type="text" placeholder="Add note here..."></textarea>
             </div>
             <div class="add w-full flex items-center justify-end ">
                 <button class="px-3 py-2 text-base font-semibold">Add</button>
             </div>
+            </div>
+            
         </div>
-          <div class="added-notes p-4 w-full flex flex-wrap mt-14">
-            <div class="addedNotes p-4 mx-4 my-3 w-1/4 border-2 border-gray-400 rounded-md">
-                <div class="title-utilicons relative">
-                    <div class="utilicons absolute right-0 top-0">
+          <div class=" added-notes p-4 w-full grid grid-cols-3 gap-5 mt-14 ">
+            <header class="col-span-3 text-start text-2xl font-bold"><span>Saved Notes</span>
+            </header>
+            <div class="addedNotes h-72 overflow-auto p-4 border-2 border-gray-400 rounded-md relative">
+                <div class="title-utilicons">
+                    <div class="utilicons absolute right-1 top-1">
                         <span class="flex  space-x-3"><i id="" class="fa-solid fa-thumbtack "></i><i class="fa-solid fa-trash"></i></span>
                     </div>
-                    <h1 class="text-xl  font-medium">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h1>
+                    <h1 class="text-xl font-medium">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h1>
                 </div>
-                <p class="mt-2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo maiores ducimus quo ex. Accusantium repudiandae explicabo dolorum quo temporibus totam illo consectetur.</p>
+                <p class="mt-2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio adipisci numquam reprehenderit corporis a assumenda quisquam beatae cumque repudiandae ex? </p>
             </div>
+          
            
-            <div class="addedNotes p-4 mx-4 my-3 w-1/4 border-2 border-gray-400 rounded-md">
-                <div class="title-utilicons relative">
-                    <div class="utilicons absolute right-0 top-0">
-                        <span class="flex  space-x-3"><i id="" class="fa-solid fa-thumbtack "></i><i class="fa-solid fa-trash"></i></span>
-                    </div>
-                    <h1 class="text-xl  font-medium">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h1>
-                </div>
-                <p class="mt-2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo maiores ducimus quo ex. Accusantium repudiandae explicabo dolorum quo temporibus totam illo consectetur.</p>
-            </div>
+         
            
-            <div class="addedNotes p-4 mx-4 my-3 w-1/4 border-2 border-gray-400 rounded-md">
-                <div class="title-utilicons relative">
-                    <div class="utilicons absolute right-0 top-0">
-                        <span class="flex  space-x-3"><i id="" class="fa-solid fa-thumbtack "></i><i class="fa-solid fa-trash"></i></span>
+          </div>
+          <div class="hidden trash-notes p-4 w-full grid grid-cols-3 gap-5 mt-14 ">
+            <header class="col-span-3 text-start text-2xl font-bold"><span>Trash</span>
+            </header>
+            <div class="addedNotes h-72 overflow-auto p-4 border-2 border-gray-400 rounded-md relative">
+                <div class="title-utilicons">
+                    <div class="utilicons absolute right-1 top-1">
+                        <span class="flex  space-x-3"><i class=" restore fa-solid fa-trash-arrow-up"></i></span>
                     </div>
-                    <h1 class="text-xl  font-medium">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h1>
+                    <h1 class="text-xl font-medium">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h1>
                 </div>
-                <p class="mt-2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo maiores ducimus quo ex. Accusantium repudiandae explicabo dolorum quo temporibus totam illo consectetur.</p>
+                <p class="mt-2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio adipisci numquam reprehenderit corporis a assumenda quisquam beatae cumque repudiandae ex? </p>
             </div>
+          
            
-            <div class="addedNotes p-4 mx-4 my-3 w-1/4 border-2 border-gray-400 rounded-md">
-                <div class="title-utilicons relative">
-                    <div class="utilicons absolute right-0 top-0">
-                        <span class="flex  space-x-3"><i id="" class="fa-solid fa-thumbtack "></i><i class="fa-solid fa-trash"></i></span>
-                    </div>
-                    <h1 class="text-xl  font-medium">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h1>
-                </div>
-                <p class="mt-2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo maiores ducimus quo ex. Accusantium repudiandae explicabo dolorum quo temporibus totam illo consectetur.</p>
-            </div>
-           
-            <div class="addedNotes p-4 mx-4 my-3 w-1/4 border-2 border-gray-400 rounded-md">
-                <div class="title-utilicons relative">
-                    <div class="utilicons absolute right-0 top-0">
-                        <span class="flex  space-x-3"><i id="" class="fa-solid fa-thumbtack "></i><i class="fa-solid fa-trash"></i></span>
-                    </div>
-                    <h1 class="text-xl  font-medium">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h1>
-                </div>
-                <p class="mt-2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo maiores ducimus quo ex. Accusantium repudiandae explicabo dolorum quo temporibus totam illo consectetur.</p>
-            </div>
+         
            
           </div>
         </section>
