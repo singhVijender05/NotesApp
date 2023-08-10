@@ -4,8 +4,7 @@ module.exports = {
   theme: {
     extend: {
       colors:{
-        skin:"#865c6c",
-        icon:'#d591a7'
+      icon:"#b8355f"
       }
     },
   },
