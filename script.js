@@ -11,12 +11,75 @@ const notesAddButton=document.getElementById('addBtn')
 const addedNotesDiv=document.getElementsByClassName('added-notes')[0]
 const trashedNotesDiv=document.getElementsByClassName('trash-notes')[0]
 
-const noteBtn=document.getElementById('notesIcon')
+const myNoteBtn=document.getElementById('notesIcon')
 const trashBtn=document.getElementById('trashIcon')
-
 let notes=[]
+let trash=[]
 
-window.onLoad(onLoad())
+
+function deleteNote(btn){
+  const title=btn.parentElement.parentElement.nextElementSibling.innerHTML.trim()
+  const description=btn.parentElement.parentElement.parentElement.nextElementSibling.innerHTML.trim()
+  trash.push({title,description})
+  updateLocalStorageWithTrash()
+  notes=notes.filter((element)=>{
+      if(!(element.titleValue==title && element.descriptionValue==description)){
+        return element
+      }
+  })
+  updateLocalStorage()
+  location.reload()
+
+}
+function addTrashOnEvent(){
+  const trashNotes=localStorage.getItem('trash')
+  if(trashNotes!=null){
+    trash=JSON.parse(trashNotes)
+  }
+  const allTrashButtons=Array.from(document.getElementsByClassName('fa-trash'))
+  allTrashButtons.forEach((btn)=>{
+    btn.addEventListener('click',()=>
+          deleteNote(btn)
+      )
+  })
+}
+
+
+window.addEventListener('load',()=>{
+  onLoading()
+})
+myNoteBtn.addEventListener('click',()=>{
+  addedNotesDiv.classList.remove('hidden')
+  trashedNotesDiv.classList.add('hidden')
+})
+trashBtn.addEventListener('click',()=>{
+  addTrashNotes()
+  addedNotesDiv.classList.add('hidden')
+  trashedNotesDiv.classList.remove('hidden')
+})
+function addTrashNotes(){
+  const storedTrashNotes=localStorage.getItem('trash')
+  trashedNotesDiv.innerHTML= `<header class="col-span-3 text-start text-2xl font-bold"><span>Trash</span>
+  </header>`
+    if(storedTrashNotes!=null){
+      const trash_notes=Array.from(JSON.parse(localStorage.getItem('trash')))
+      trash_notes.forEach(element => {
+        const titleValue=element.title
+        const descriptionValue=element.description
+        
+        const noteTemplate=`<div class="addedNotes h-72 overflow-auto p-4 border-2 border-gray-400 rounded-md relative">
+        <div class="title-utilicons">
+            <div class="utilicons absolute right-1 top-1">
+                <span class="flex  space-x-3"><i class=" restore fa-solid fa-trash-arrow-up"></i></span>
+            </div>
+            <h1 class="text-xl font-medium">${titleValue}</h1>
+        </div>
+        <p class="mt-2">${descriptionValue}</p>
+    </div>`
+        trashedNotesDiv.innerHTML+=noteTemplate
+    });
+  }
+}
 
 titleIp.addEventListener('focus',()=>{
   ipTextAreaAddbtn.classList.remove('hidden')
@@ -48,7 +111,9 @@ notesAddButton.addEventListener('click',()=>{
    const noteTemplate=`<div class="addedNotes h-72 overflow-auto p-4 border-2 border-gray-400 rounded-md relative">
    <div class="title-utilicons">
        <div class="utilicons absolute right-1 top-1">
-           <span class="flex  space-x-3"><i id="" class="fa-solid fa-thumbtack "></i><i class="fa-solid fa-trash"></i></span>
+           <div class="flex space-x-3">
+           <i id="" class="fa-solid fa-thumbtack "></i><i class="fa-solid fa-trash cursor-pointer"></i>
+           </div>
        </div>
        <h1 class="text-xl font-medium">${titleValue}</h1>
    </div>
@@ -62,14 +127,19 @@ notesAddButton.addEventListener('click',()=>{
    updateLocalStorage();
    titleIp.value=''
    descriptionIp.value=''
+   addTrashOnEvent()
   }
   function updateLocalStorage(){
     localStorage.setItem('notes',JSON.stringify(notes))
   }
+  function updateLocalStorageWithTrash(){
+    localStorage.setItem('trash',JSON.stringify(trash))
+  }
 
-  function onLoad(){
+  function onLoading(){
     const storedNotes=localStorage.getItem('notes')
-    addedNotesDiv.innerHTML=''
+    addedNotesDiv.innerHTML=`<header class="col-span-3 text-start text-2xl font-bold"><span>Saved Notes</span>
+    </header>`
     if(storedNotes!=null){
       notes=Array.from(JSON.parse(localStorage.getItem('notes')))
       notes.forEach(element => {
@@ -79,7 +149,8 @@ notesAddButton.addEventListener('click',()=>{
         const noteTemplate=`<div class="addedNotes h-72 overflow-auto p-4 border-2 border-gray-400 rounded-md relative">
         <div class="title-utilicons">
             <div class="utilicons absolute right-1 top-1">
-                <span class="flex  space-x-3"><i id="" class="fa-solid fa-thumbtack "></i><i class="fa-solid fa-trash"></i></span>
+            <div class="flex space-x-3">
+            <i id="" class="fa-solid fa-thumbtack "></i><i class="fa-solid fa-trash cursor-pointer"></i></div>
             </div>
             <h1 class="text-xl font-medium">${titleValue}</h1>
         </div>
@@ -88,4 +159,5 @@ notesAddButton.addEventListener('click',()=>{
         addedNotesDiv.innerHTML+=noteTemplate
     });
   }
+  addTrashOnEvent()
 }
