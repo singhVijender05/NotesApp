@@ -123,13 +123,13 @@ function addNote(){
  updateLocalStorage('notes',notes);
  titleIp.value=''
  descriptionIp.value=''
+ addEventListeners()
 }
 
 function deleteNote(btn){
   const title=btn.parentElement.parentElement.nextElementSibling.innerHTML.trim()
   const description=btn.parentElement.parentElement.parentElement.nextElementSibling.innerHTML.trim()
   trash.push({title,description})
-  console.log(trash)
   updateLocalStorage('trash',trash)
   notes=notes.filter((element)=>{
       if(!(element.titleValue==title && element.descriptionValue==description)){
