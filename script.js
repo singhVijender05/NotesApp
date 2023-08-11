@@ -239,6 +239,7 @@ function trashNoteTemplate(titleValue,descriptionValue){
   <p class="mt-1">${descriptionValue}</p>
 </div></div></div>`
 
+
 }
 function savedNoteTemplate(titleValue,descriptionValue){
   return `<div class='addedNotesFrame p-4'>
