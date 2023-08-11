@@ -25,3 +25,11 @@ body{
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
+
+    .content {
+        height: 100%;
+        background-image: repeating-linear-gradient(180deg, transparent, transparent 12px, teal 12px, teal calc(12px + 1px));
+        background-size: 100% 24px;
+        line-height: 24px;
+    }
+    
