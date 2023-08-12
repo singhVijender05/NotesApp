@@ -29,8 +29,8 @@ function initialization(){
 function addStaticEventListeners(){
   window.addEventListener('load',initialization)
   myNoteBtn.addEventListener('click',()=>{
-    slideSideBar()
     showSavedNotes()
+    slideSideBar()
   })
   trashBtn.addEventListener('click',()=>{
     showTrashNotes()
@@ -54,6 +54,9 @@ document.addEventListener("click", (event) => {
   if (!noteInputContainer.contains(event.target)) {
     titleIp.placeholder='Take a note...'
     ipTextAreaAddbtn.classList.add("hidden"); // Hide the div when clicking outside noteInputContainer
+  }
+  if(!allOptions.contains(event.target)&& !menuBtn.contains(event.target)){
+    slideSideBar()
   }
 })
 
@@ -281,7 +284,7 @@ function trashNoteTemplate(titleValue,descriptionValue){
   <div class="title-utilicons">
      <div class="utilicons absolute right-1 top-1">
          <div class="flex space-x-3">
-             <i class="restore text-green-400 fa-solid fa-trash-arrow-up cursor-pointer"></i><i class=" pdelete fa-solid fa-trash cursor-pointer text-red-500"></i>
+             <i title='Restore' class="restore text-green-400 fa-solid fa-trash-arrow-up cursor-pointer"></i><i title='Delete' class=" pdelete fa-solid fa-trash cursor-pointer text-red-500"></i>
          </div>
      </div>
      <h1 class="text-xl font-medium underline underline-offset-4">${titleValue}</h1>
@@ -299,7 +302,7 @@ function savedNoteTemplate(titleValue,descriptionValue){
   <div class="title-utilicons">
      <div class="utilicons absolute right-1 top-1">
          <div class="flex space-x-3">
-         <i id="" class="fa-solid fa-thumbtack"></i><i class="  fa-solid fa-trash cursor-pointer"></i>
+         <i title='Pin Note' id="" class="fa-solid fa-thumbtack"></i><i title='Move to Trash' class="  fa-solid fa-trash cursor-pointer"></i>
          </div>
      </div>
      <h1 class="text-xl font-medium underline underline-offset-4">${titleValue}</h1>
