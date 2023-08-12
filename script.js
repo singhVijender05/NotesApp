@@ -2,80 +2,107 @@ let notes=[]
 let trash=[]
 let filtered=[]
 const noteInputContainer=document.getElementById('noteInputContainer')
-const titleIp=document.getElementsByTagName('input')[1]
+const titleIp=document.getElementsByTagName('input')[0]
 const descriptionIp=document.getElementById('descriptionIp')
 //this to be shown while entering title
 const ipTextAreaAddbtn=document.getElementById('ipTextAreaAddbtn')
 
 const searchBtn=document.getElementById('searchBtn')
-const searchNote=document.getElementsByTagName('input')[0]
+const searchNote=document.getElementsByTagName('input')[1]
 const notesAddButton=document.getElementById('addBtn')
-
 const addedNotesDiv=document.getElementsByClassName('added-notes')[0]
 const trashedNotesDiv=document.getElementsByClassName('trash-notes')[0]
 
 const myNoteBtn=document.getElementById('notesIcon')
 const trashBtn=document.getElementById('trashIcon')
+const menuBtn=document.getElementById('dropMenu')
+const allOptions=document.getElementsByClassName('allOptions')[0]
 
 const allAddedNotes=document.querySelectorAll('.addedNotes')
+
+
 
 function initialization(){
   Load()
 }
 
-
-function addEventListeners(){
+function addStaticEventListeners(){
   window.addEventListener('load',initialization)
-  myNoteBtn.addEventListener('click',showSavedNotes)
-  trashBtn.addEventListener('click',showTrashNotes)
-  
-  
+  myNoteBtn.addEventListener('click',()=>{
+    slideSideBar()
+    showSavedNotes()
+  })
+  trashBtn.addEventListener('click',()=>{
+    showTrashNotes()
+    slideSideBar()
+  })
+
   titleIp.addEventListener('focus',()=>{
+    titleIp.placeholder='Title'
     ipTextAreaAddbtn.classList.remove('hidden')
   })
 
-  
   titleIp.addEventListener('keydown',(e)=>{
-      if (e.key === 'Enter') {
-          e.preventDefault(); // Prevent the default Enter behavior (form submission)
-          // Move focus to the textarea
-          descriptionIp.focus();
-      }
-  });
-  
-  document.addEventListener("click", (event) => {
-      if (!noteInputContainer.contains(event.target)) {
-        ipTextAreaAddbtn.classList.add("hidden"); // Hide the div when clicking outside noteInputContainer
-      }
-    })
-  
-  notesAddButton.addEventListener('click',()=>{
-      if (titleIp.value.trim() !== '') {
-          addNote();
-        }
+    if (e.key === 'Enter') {
+        e.preventDefault(); // Prevent the default Enter behavior (form submission)
+        // Move focus to the textarea
+        descriptionIp.focus();
+    }
+});
+
+document.addEventListener("click", (event) => {
+  if (!noteInputContainer.contains(event.target)) {
+    titleIp.placeholder='Take a note...'
+    ipTextAreaAddbtn.classList.add("hidden"); // Hide the div when clicking outside noteInputContainer
+  }
+})
+
+notesAddButton.addEventListener('click',()=>{
+  if (titleIp.value.trim() !== '') {
+      addNote();
+    }
+})
+
+searchNote.addEventListener('input',filterNotes)
+  searchNote.addEventListener('keyup',(e)=>{
+    if(e.target.value==''){
+      showSavedNotes()
+    }
   })
+
+  menuBtn.addEventListener('click',()=>{
+       slideSideBar()
+    })
+}
+
+function slideSideBar(){
+  allOptions.classList.toggle('hidden')
+}
+function addDyanamicEventListeners(){
+
   const trashBtns=document.querySelectorAll('.fa-trash')
   trashBtns.forEach((btn)=>{
     btn.addEventListener('click',()=>{
       deleteNote(btn)
     })
   })
+  const pdeleteBtns=document.querySelectorAll('.pdelete')
+  pdeleteBtns.forEach((btn)=>{
+    btn.addEventListener('click',()=>{
+      permanentDeleteNote(btn)
+    })
+  })
+
   const restoreBtns=document.querySelectorAll('.restore')
   restoreBtns.forEach((btn)=>{
     btn.addEventListener('click',()=>{
       restoreNote(btn)
     })
   })
-  searchNote.addEventListener('input',filterNotes)
-  searchNote.addEventListener('keyup',(e)=>{
-    if(e.target.value==''){
-      showSavedNotes()
-    }
-  })
+  
   const pinBtns=document.querySelectorAll('.fa-thumbtack')
   pinBtns.forEach((btn)=>{
     btn.addEventListener('click',()=>{
-      console.log('hello') 
       pinUnpin(btn)
       showSavedNotes()
     })
@@ -111,21 +138,22 @@ function filterNotes(){
     const descriptionValue=element.descriptionValue
     addedNotesDiv.innerHTML+=savedNoteTemplate(titleValue,descriptionValue)
   })
-  addEventListeners()
+  addDyanamicEventListeners()
 }
 }
 
 
 function showSavedNotes(){
     renderSavedNotes()
-    addedNotesDiv.classList.remove('hidden')
-    trashedNotesDiv.classList.add('hidden')
+    addedNotesDiv.classList.remove('md:hidden','hidden')
+    trashedNotesDiv.classList.add('md:hidden','hidden')
     
 }
 function showTrashNotes(){
     renderTrashNotes() 
-    addedNotesDiv.classList.add('hidden')
-    trashedNotesDiv.classList.remove('hidden')
+    addedNotesDiv.classList.add('md:hidden','hidden')
+    
+    trashedNotesDiv.classList.remove('md:hidden','hidden')
 }
 function Load(){
   fetchNotes()
@@ -148,7 +176,7 @@ function updateLocalStorage(key,data){
 }
 function renderSavedNotes(){
   fetchNotes()
-  addedNotesDiv.innerHTML=`<header class="col-span-3 text-start text-2xl font-bold"><span>Saved Notes</span>
+  addedNotesDiv.innerHTML=`<header class="col-span-3 mb-3 text-start text-2xl font-bold"><span>Saved Notes</span>
   </header>`
   if(notes!=null)
     notes.forEach(element => {
@@ -164,11 +192,11 @@ function renderSavedNotes(){
       }
       addedNotesDiv.innerHTML+=noteTemplate
 })
-addEventListeners()
+addDyanamicEventListeners()
 }
 function renderTrashNotes(){
   fetchTrash()
-  trashedNotesDiv.innerHTML= `<header class="col-span-3 text-start text-2xl font-bold"><span>Trash</span>
+  trashedNotesDiv.innerHTML= `<header class="col-span-3 mb-3 text-start text-2xl font-bold"><span>Trash</span>
   </header>`
     if(trash!=null){
         trash.forEach(element => {
@@ -179,7 +207,7 @@ function renderTrashNotes(){
         trashedNotesDiv.innerHTML+=noteTemplate
     });
   }
-  addEventListeners()
+  addDyanamicEventListeners()
 }
 
 
@@ -195,17 +223,39 @@ function addNote(){
 }
 
 function deleteNote(btn){
-  const titleValue=btn.parentElement.parentElement.nextElementSibling.innerHTML.trim()
-  const descriptionValue=btn.parentElement.parentElement.parentElement.nextElementSibling.innerHTML.trim()
-  trash.push({titleValue,descriptionValue})
-  updateLocalStorage('trash',trash)
-  notes=notes.filter((element)=>{
-      if(!(element.titleValue==titleValue && element.descriptionValue==descriptionValue)){
-        return element
-      }
-  })
-  updateLocalStorage('notes',notes)
-  renderSavedNotes()
+  try{
+    const titleValue=btn.parentElement.parentElement.nextElementSibling.innerHTML.trim()
+    const descriptionValue=btn.parentElement.parentElement.parentElement.nextElementSibling.innerHTML.trim()
+    trash.push({titleValue,descriptionValue})
+    updateLocalStorage('trash',trash)
+    notes=notes.filter((element)=>{
+        if(!(element.titleValue==titleValue && element.descriptionValue==descriptionValue)){
+          return element
+        }
+    })
+    updateLocalStorage('notes',notes)
+    renderSavedNotes()
+  }
+  catch(Error){
+    console.log(Error)
+  }
+}
+function permanentDeleteNote(btn){
+  try{
+    const titleValue=btn.parentElement.parentElement.nextElementSibling.innerHTML.trim()
+    const descriptionValue=btn.parentElement.parentElement.parentElement.nextElementSibling.innerHTML.trim()
+    trash=trash.filter((element)=>{
+        if(!(element.titleValue==titleValue && element.descriptionValue==descriptionValue)){
+          return element
+        }
+    })
+    updateLocalStorage('trash',trash)
+    renderTrashNotes()
+  }
+  catch(Error){
+    console.log(Error)
+  }
+ 
 }
 function restoreNote(btn){
   const titleValue=btn.parentElement.parentElement.nextElementSibling.innerHTML.trim()
@@ -226,19 +276,20 @@ function restoreNote(btn){
 
 function trashNoteTemplate(titleValue,descriptionValue){
  return `<div class='trashNotesFrame p-4'>
- <div class="trashNotes h-72 overflow-auto py-4 border-2 border-gray-400 rounded-md relative">
- <div class='content py-2 px-3 '>
+  <div class="trashNotes h-72 overflow-auto py-4 border-2 border-gray-400 rounded-md relative">
+  <div class='content py-2 px-3'>
   <div class="title-utilicons">
-  <div class="utilicons absolute right-1 top-1">
-          <div class="flex  space-x-3">
-          <i class=" restore text-green-400 fa-solid fa-trash-arrow-up cursor-pointer"></i>
-          </div>
-      </div>
-      <h1 class="text-xl font-medium underline underline-offset-4">${titleValue}</h1>
-  </div>
-  <p class="mt-1">${descriptionValue}</p>
-</div></div></div>`
-
+     <div class="utilicons absolute right-1 top-1">
+         <div class="flex space-x-3">
+             <i class="restore text-green-400 fa-solid fa-trash-arrow-up cursor-pointer"></i><i class=" pdelete fa-solid fa-trash cursor-pointer text-red-500"></i>
+         </div>
+     </div>
+     <h1 class="text-xl font-medium underline underline-offset-4">${titleValue}</h1>
+ </div>
+ <p class="mt-1">${descriptionValue}</p>
+ </div>
+ </div>
+ </div>`
 
 }
 function savedNoteTemplate(titleValue,descriptionValue){
@@ -259,5 +310,6 @@ function savedNoteTemplate(titleValue,descriptionValue){
  </div>`
 
 }
-
 initialization()
+addStaticEventListeners()
+
