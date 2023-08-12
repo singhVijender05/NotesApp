@@ -7,40 +7,43 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-    <nav class="navbar bg-white sticky top-0 left-0 z-50 flex md:justify-start justify-between items-center py-2 px-4  border-b-[1px] border-gray-400">
-        <div class="logopart flex items-center md:w-1/5 w-2/5 md:justify-start justify-between md:space-x-4 ">
-            <button><i class="fa-solid fa-bars"></i></button>
-            <span class="md:text-xl text-base font-bold">Notes Saver</span>
-            <img class="w-10 h-11" src="Education_(638).jpg" alt="error">
+<body >
+    <nav class="navbar bg-white sticky top-0 z-50 w-full flex overflow-hidden md:justify-start justify-between items-center py-2 px-4 border-b-[1px] border-gray-400">
+        <div class="logopart flex items-center w-1/2  justify-around md:justify-start md:space-x-8">
+            <button id="dropMenu" class="px-2 py-1 border-2 border-gray-500 rounded-md"><i class="fa-solid fa-bars"></i></button>
+            <div class="flex items-center">
+              <span class="md:text-xl md:whitespace-nowrap text-base  leading-4 md:font-bold font-semibold">Notes Saver</span>
+              <img class="md:w-10 md:h-11 w-8 h-9" src="Education_(638).jpg" alt="error">
+            </div>
         </div>
-        <div class="searchbox flex items-center md:w-3/5 w-2/5 bg-gray-200 rounded-md">
-            <i id="searchBtn" class="fa-solid fa-magnifying-glass md:px-3 md:py-2 px-2 py-1 cursor-pointer"></i>
-            <input id="searchNote" class="w-4/5 bg-gray-200 px-3 py-2 outline-none rounded-md  placeholder:text-black placeholder:text-sm md:placeholder:text-base" type="text" placeholder="Search Note">
+       
+        <div class="linkedIn flex items-center justify-end w-1/2 p-1 md:space-x-3">
+          <a href="https://www.linkedin.com/in/vijender-singh-794995230/"><img class="w-12 h-12" src="vecteezy_linkedin-logo-png-linkedin-icon-transparent-png_18930587_72.png" alt=""></a>
+          <a href="https://github.com/singhVijender05/NotesApp"><img class="w-8 h-9 pb-1"  src="github-mark.png" alt=""></a>
         </div>
     </nav>
     <main class="w-full h-max mt-2 flex">
-        <aside class="appOptions tracking-wide pr-2 flex flex-col w-2/12 border-r-[1px] border-gray-400 h-screen space-y-1">
+        <aside class="allOptions text-white tracking-wide hidden fixed z-50 bg-white pr-2 flex flex-col md:w-[14%] w-1/2  border-r-[1px] border-gray-400 h-screen space-y-1">
           <div id="notesIcon" class="noteicon  bg-icon flex items-center text-sm font-bold  px-4 py-2  space-x-12 rounded-r-full">
             <div class="icon  rounded-full px-3 py-2"><i class="fa-solid fa-pen"></i></div>
             <span class="">Notes</span>
           </div>
-          <div class="archiveicon  bg-icon flex items-center text-sm font-bold  px-4 py-2  space-x-12 rounded-r-full">
+          <!-- <div class="archiveicon  bg-icon flex items-center text-sm font-bold  px-4 py-2  space-x-12 rounded-r-full">
             <div class="icon  rounded-full px-3 py-2"><i class="fa-solid fa-box-archive"></i></div>
             <span class="">Archive</span>
-          </div>
+          </div> -->
           <div id="trashIcon" class="trashicon  bg-icon flex items-center text-sm font-bold  px-4 py-2  space-x-12 rounded-r-full">
             <div class="icon  rounded-full px-3 py-2"><i class="fa-solid fa-trash"></i></div>
             <span class="">Trash</span>
           </div>
           
         </aside >
-
-
-        <section class="w-9/12 p-8 ">
-          <div id="noteInputContainer" class="noteInputBox  w-1/2 border-[2px] shadow-md shadow-gray-500 border-gray-400 rounded-md p-4">
+       
+        <section class="md:w-9/12 w-10/12 md:p-8 px-2 md:px-12 py-4 mx-auto ">
+        
+          <div id="noteInputContainer" class="noteInputBox  w-full md:w-1/2 border-[2px] shadow-md shadow-gray-500 border-gray-400 rounded-md p-4">
             <div class="titleIp flex justify-between items-center">
-                      <input id="titleIp" class="w-11/12 px-2 outline-none placeholder:text-gray-600 placeholder:font-medium" type="text" placeholder="Title">
+                      <input id="titleIp" class="w-11/12 px-2 outline-none placeholder:text-gray-600 placeholder:font-medium" type="text" placeholder="Take a note...">
                       <!-- <i id="pin-note" class="fa-solid fa-thumbtack "></i> -->
             </div>
             <div id="ipTextAreaAddbtn" class="hidden">
@@ -50,12 +53,15 @@
             <div class="add w-full flex items-center justify-end ">
                 <button id="addBtn" class="px-3 py-2 text-base font-semibold">Add</button>  
             </div>
-            </div>
-            
+            </div>   
         </div>
-          <div class="added-notes p-4 w-full grid grid-cols-3 gap-5 mt-14 ">
-            <header class="col-span-3 text-start text-2xl font-bold"><span>Saved Notes</span>
-            </header>
+        <div class="searchbox mt-8 flex items-center justify-start bg-gray-200 rounded-md px-1">
+          <i id="searchBtn" class="fa-solid fa-magnifying-glass md:px-3 md:py-2 px-2 py-1 cursor-pointer"></i>
+          <input id="searchNote" class="w-4/5 bg-gray-200 px-3 py-2 outline-none rounded-md  placeholder:text-black placeholder:text-sm md:placeholder:text-base" type="text" placeholder="Search Note">
+      </div>
+          <div class="added-notes py-4 w-full md:grid md:grid-cols-3  md:gap-5 mt-4 ">
+            <!-- <header class="col-span-3 text-start md:text-2xl text-xl font-bold"><span>Saved Notes</span>
+            </header> -->
             <!-- <div class="addeNotesFrame">
 
                <div class="addedNotes h-72 overflow-auto p-4 border-2 border-gray-400 rounded-md relative">
@@ -72,7 +78,7 @@
             <!-- </div> -->
         
           </div>
-          <div class="hidden trash-notes p-4 w-full grid grid-cols-3 gap-5 mt-14 ">
+          <div class=" trash-notes py-4 w-full md:grid md:grid-cols-3 md:hidden hidden  md:gap-5 mt-4 ">
             <!-- <header class="col-span-3 text-start text-2xl font-bold"><span>Trash</span>
             </header> -->
             <!-- <div class="addedNotes h-72 overflow-auto p-4 border-2 border-gray-400 rounded-md relative">
