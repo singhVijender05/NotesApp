@@ -55,7 +55,7 @@ document.addEventListener("click", (event) => {
     titleIp.placeholder='Take a note...'
     ipTextAreaAddbtn.classList.add("hidden"); // Hide the div when clicking outside noteInputContainer
   }
-  if(!allOptions.contains(event.target)&& !menuBtn.contains(event.target)){
+  if(!allOptions.contains(event.target) && !menuBtn.contains(event.target) && !allOptions.classList.contains('hidden')){
     slideSideBar()
   }
 })
